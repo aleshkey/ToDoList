@@ -1,0 +1,4 @@
+<app-theme-switcher></app-theme-switcher>
+<app-search (searchEvent)="onSearch($event)"></app-search>
+<app-card *ngIf="selectedUsername" [username]="selectedUsername"></app-card>
+

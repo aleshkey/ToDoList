@@ -1,0 +1,41 @@
+/* Стили для компонента card */
+img {
+    width: 366px;
+    height: 364px;
+}
+
+p {
+    font-family: Jost, serif;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.card {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 500px;
+    height: 500px;
+    background: var(--background-color);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    flex-direction: column;
+    padding-left: 67px;
+    margin-left: 70px;
+}
+
+@media (max-width: 390px) {
+    .card {
+        display: block;
+        width: calc(100% - 98px);
+        height: auto;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-left: 3px;
+        margin-top: 10px;
+    }
+
+    img {
+        width: calc(100% - 98px);
+        height: auto;
+    }
+}

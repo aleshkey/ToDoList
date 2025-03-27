@@ -1,0 +1,11 @@
+<!-- Шаблон компонента card -->
+<div class="card" *ngIf="user">
+    <p>Login: {{ user.login }}</p>
+    <img
+        *ngIf="user"
+        ngSrc="{{ user?.avatar_url }}"
+        alt="Avatar"
+        width="366"
+        height="364"
+    />
+</div>

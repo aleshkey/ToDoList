@@ -1,0 +1,44 @@
+/* notification.component.css */
+.notification {
+    padding: 15px 20px;
+    border-radius: 4px;
+    margin: 10px;
+    position: relative;
+    color: #fff;
+    animation: fadeIn 0.5s;
+}
+
+/* Цветовые темы уведомлений */
+.notification.info {
+    background-color: #2196F3;
+}
+
+.notification.success {
+    background-color: #4CAF50;
+}
+
+.notification.error {
+    background-color: #f44336;
+}
+
+.notification.warning {
+    background-color: #ff9800;
+}
+
+/* Кнопка закрытия */
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

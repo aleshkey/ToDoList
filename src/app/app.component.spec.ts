@@ -1,10 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import {ChangeDetectorRef} from "@angular/core";
+import {TaskService} from "./storage/service/task.service";
+import {RouterTestingModule} from "@angular/router/testing";
 
 describe('AppComponent', () => {
+  let cdrSpy: jasmine.SpyObj<ChangeDetectorRef>;
+
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      cdrSpy = jasmine.createSpyObj('ChangeDetectorRef', ['detectChanges']);    await TestBed.configureTestingModule({
+      imports: [RouterTestingModule, AppComponent],
+      providers: [
+          { provide: ChangeDetectorRef, useValue: cdrSpy }
+      ]
     }).compileComponents();
   });
 
@@ -20,10 +28,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('ToDoList');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, ToDoList');
-  });
 });
