@@ -1,0 +1,1 @@
+*{margin:0;padding:0}:root{--primary-color: #3E50B5;--secondary-color: #FF4081;--background-color: white}[data-theme=dark]{--primary-color: #603030;--secondary-color: #000000;--background-color: #303030}[data-theme=light]{--primary-color: #3E50B5;--secondary-color: #FF4081;--background-color: white}body{background:var(--background-color)}
