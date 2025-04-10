@@ -1,14 +1,13 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
 import {TaskService} from "../../storage/service/task.service";
 import {FormsModule} from "@angular/forms";
-import {NgForOf} from "@angular/common";
+
 
 @Component({
     selector: 'app-task-list',
     imports: [
-        FormsModule,
-        NgForOf
-    ],
+    FormsModule
+],
     templateUrl: './task-list.component.html',
     styleUrl: './task-list.component.css'
 })
@@ -17,15 +16,14 @@ export class TaskListComponent {
 
     constructor(
         protected taskService: TaskService,
-        private cdr: ChangeDetectorRef
     ) {
     }
 
-    deleteTask(id: number) {
+    deleteTask(id: number): void {
         this.taskService.deleteById(id);
     }
 
-    editTask(id: number) {
+    editTask(id: number): void {
         const task = this.taskService
             .getAll()
             .find(t => t.id === id);
@@ -37,12 +35,12 @@ export class TaskListComponent {
         }
     }
 
-    updateButtonState() {
-        this.isAnyChecked = this.taskService.getAll().some(task => task.checked);
-        this.cdr.detectChanges();
+    updateButtonState(): void {
+        this.isAnyChecked = this.taskService.getAll()
+            .some(task => task.checked);
     }
 
-    deleteSelected() {
+    deleteSelected(): void {
         this.taskService.deleteChecked()
     }
 }

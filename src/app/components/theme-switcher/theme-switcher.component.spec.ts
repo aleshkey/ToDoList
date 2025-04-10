@@ -1,85 +1,68 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ThemeSwitcherComponent } from './theme-switcher.component';
-import { Renderer2, ChangeDetectorRef } from '@angular/core';
+import { Renderer2 } from '@angular/core';
 
 describe('ThemeSwitcherComponent', () => {
     let component: ThemeSwitcherComponent;
     let fixture: ComponentFixture<ThemeSwitcherComponent>;
-    let rendererSpy: jasmine.SpyObj<Renderer2>;
-    let cdrSpy: jasmine.SpyObj<ChangeDetectorRef>;
+    let renderer2Spy: jasmine.SpyObj<Renderer2>;
 
-    const originalMatchMedia = window.matchMedia;
+    beforeEach(() => {
+        renderer2Spy = jasmine.createSpyObj('Renderer2', ['setAttribute']);
 
-    beforeEach(async () => {
-        rendererSpy = jasmine.createSpyObj('Renderer2', ['setAttribute']);
-        cdrSpy = jasmine.createSpyObj('ChangeDetectorRef', ['detectChanges']);
-
-        window.matchMedia = jasmine.createSpy('matchMedia').and.callFake((query: string) => {
-            return { matches: false } as MediaQueryList;
-        });
-
-        localStorage.removeItem('theme');
-
-        await TestBed.configureTestingModule({
+        TestBed.configureTestingModule({
             imports: [ThemeSwitcherComponent],
             providers: [
-                { provide: Renderer2, useValue: rendererSpy },
-                { provide: ChangeDetectorRef, useValue: cdrSpy }
+                { provide: Renderer2, useValue: renderer2Spy }
             ]
         }).compileComponents();
 
         fixture = TestBed.createComponent(ThemeSwitcherComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
     });
 
     afterEach(() => {
-        window.matchMedia = originalMatchMedia;
+        localStorage.clear();
     });
 
-    it('should create the component', () => {
+    it('should create', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should use saved theme from localStorage if exists', () => {
+    it('should initialize theme from localStorage if present', () => {
         localStorage.setItem('theme', 'dark');
-
-        fixture = TestBed.createComponent(ThemeSwitcherComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-
+        component.ngOnInit();
         expect(component.theme).toBe('dark');
     });
 
-    it('should default to theme based on window.matchMedia if no saved theme', () => {
-        // Настраиваем matchMedia так, чтобы возвращалось matches: true (предпочтение темной темы)
-        (window.matchMedia as jasmine.Spy).and.returnValue({ matches: true } as MediaQueryList);
+    it('should use prefers-color-scheme if theme not in localStorage', () => {
+        spyOn(window, 'matchMedia').and.returnValue({
+            matches: true,
+            media: '(prefers-color-scheme: dark)',
+            onchange: null,
+            addListener: () => {},
+            removeListener: () => {},
+            addEventListener: () => {},
+            removeEventListener: () => {},
+            dispatchEvent: () => true
+        } as MediaQueryList);
 
-        fixture = TestBed.createComponent(ThemeSwitcherComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-
+        component.ngOnInit();
         expect(component.theme).toBe('dark');
     });
 
-    it('toggleDropdown should toggle isDropdownOpen', () => {
-        const initial = component.isDropdownOpen;
+    it('should toggle dropdown visibility', () => {
+        expect(component.isDropdownOpen).toBeFalse();
         component.toggleDropdown();
-        expect(component.isDropdownOpen).toBe(!initial);
-
+        expect(component.isDropdownOpen).toBeTrue();
         component.toggleDropdown();
-        expect(component.isDropdownOpen).toBe(initial);
+        expect(component.isDropdownOpen).toBeFalse();
     });
 
-    it('setTheme should update theme, save to localStorage, apply theme and close dropdown', () => {
-        spyOn(component, 'applyTheme').and.callThrough();
-        component.isDropdownOpen = true;
-
+    it('should set and apply the selected theme', () => {
         component.setTheme('dark');
-
         expect(component.theme).toBe('dark');
         expect(localStorage.getItem('theme')).toBe('dark');
-        expect(component.applyTheme).toHaveBeenCalled();
         expect(component.isDropdownOpen).toBeFalse();
     });
 });

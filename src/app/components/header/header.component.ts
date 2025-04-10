@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, output} from '@angular/core';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {SidenavComponent} from "../sidenav/sidenav.component";
 
@@ -13,10 +13,9 @@ import {SidenavComponent} from "../sidenav/sidenav.component";
     ]
 })
 export class HeaderComponent {
-    @Output() sidenavStateChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    sidenavStateChange = output<boolean>();
 
     onSidenavToggle(isOpen: boolean): void {
-        console.log("HeaderComponent - Sidenav state changed:", isOpen);
         this.sidenavStateChange.emit(isOpen);
     }
 }

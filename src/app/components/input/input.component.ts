@@ -1,5 +1,5 @@
-import { Component, forwardRef, Input } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor, FormsModule } from '@angular/forms';
+import {Component, forwardRef, input} from '@angular/core';
+import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
     selector: 'app-input',
@@ -17,7 +17,7 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor, FormsModule } from '@angular/f
     ]
 })
 export class InputComponent implements ControlValueAccessor {
-    @Input() label: string = 'Add a new task';
+    label = input<string>('Add a new task');
     value: string = '';
     isFocused: boolean = false;
 
@@ -28,11 +28,11 @@ export class InputComponent implements ControlValueAccessor {
         this.value = value;
     }
 
-    registerOnChange(fn: any): void {
+    registerOnChange(fn: () => void): void {
         this.onChange = fn;
     }
 
-    registerOnTouched(fn: any): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 

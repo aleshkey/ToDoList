@@ -8,7 +8,8 @@ describe('AppComponent', () => {
   let cdrSpy: jasmine.SpyObj<ChangeDetectorRef>;
 
   beforeEach(async () => {
-      cdrSpy = jasmine.createSpyObj('ChangeDetectorRef', ['detectChanges']);    await TestBed.configureTestingModule({
+      cdrSpy = jasmine.createSpyObj('ChangeDetectorRef', ['detectChanges']);
+      await TestBed.configureTestingModule({
       imports: [RouterTestingModule, AppComponent],
       providers: [
           { provide: ChangeDetectorRef, useValue: cdrSpy }

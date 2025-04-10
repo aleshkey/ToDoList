@@ -1,26 +1,33 @@
-import { Component, Renderer2, OnInit, ChangeDetectorRef } from '@angular/core';
-import { NgIf } from '@angular/common';
+import {
+    Component,
+    OnInit,
+    Renderer2,
+    ChangeDetectionStrategy
+} from '@angular/core';
 
 @Component({
     selector: 'app-theme-switcher',
     templateUrl: './theme-switcher.component.html',
     styleUrls: ['./theme-switcher.component.css'],
-    imports: [NgIf]
+    changeDetection: ChangeDetectionStrategy.Default
 })
 export class ThemeSwitcherComponent implements OnInit {
     theme: 'light' | 'dark' = 'light';
     isDropdownOpen = false;
 
-    constructor(private renderer: Renderer2, private cdr: ChangeDetectorRef) {
-        const savedTheme = localStorage.getItem('theme') as 'light' | 'dark';
-        if (savedTheme) {
-            this.theme = savedTheme;
-        } else {
-            this.theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
-    }
+    constructor(
+        private renderer: Renderer2
+    ) {}
 
     ngOnInit(): void {
+        const saved = localStorage.getItem('theme') as 'light' | 'dark' | null;
+        if (saved) {
+            this.theme = saved;
+        } else {
+            this.theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light';
+        }
         this.applyTheme();
     }
 
@@ -35,10 +42,11 @@ export class ThemeSwitcherComponent implements OnInit {
         this.isDropdownOpen = false;
     }
 
-    applyTheme(): void {
-        console.log(`Applying theme: ${this.theme}`);
-        this.renderer.setAttribute(document.documentElement, 'data-theme', this.theme);
-        this.cdr.detectChanges();
-        console.log('Data-theme attribute set:', document.documentElement.getAttribute('data-theme'));
+    private applyTheme(): void {
+        this.renderer.setAttribute(
+            document.documentElement,
+            'data-theme',
+            this.theme
+        );
     }
 }

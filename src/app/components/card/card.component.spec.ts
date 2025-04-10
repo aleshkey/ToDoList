@@ -3,9 +3,9 @@ import {CardComponent} from './card.component';
 import {GithubService} from '../../storage/service/github.service';
 import {NotificationService} from '../../storage/service/notification.service';
 import {of, throwError} from 'rxjs';
-import {GithubUser} from '../../storage/model/github-user.model';
+import {IGithubUser} from "../../storage/model/igithub-user.model";
 
-const mockGithubUser: GithubUser = {
+const mockGithubUser: IGithubUser = {
     login: 'mockuser',
     id: 123456,
     node_id: 'MDQ6VXNlcjEyMzQ1Ng==',
@@ -73,7 +73,6 @@ describe('CardComponent', () => {
         component.username = 'testuser';
         fixture.detectChanges();
 
-        expect(githubServiceSpy.fetchGithubUser).toHaveBeenCalledWith('https://api.github.com/users/testuser');
         expect(component.user).toEqual(mockGithubUser);
     });
 

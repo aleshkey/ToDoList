@@ -1,0 +1,9 @@
+<div class="notifications-container">
+  @for (note of notifications; track note) {
+    <app-notification
+      [message]="note.message"
+      [type]="note.type"
+      (dismissed)="remove(note)">
+    </app-notification>
+  }
+</div>

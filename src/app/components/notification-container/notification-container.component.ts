@@ -1,39 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import {NotificationComponent} from "../notification/notification.component";
-import {NgForOf} from "@angular/common";
+
 import {NotificationService} from "../../storage/service/notification.service";
-import {Notification} from "../../storage/model/notification.model";
+import {INotification} from "../../storage/model/inotification.model";
 
 @Component({
     selector: 'app-notifications-container',
-    template: `
-        <div class="notifications-container">
-            <app-notification
-                *ngFor="let note of notifications"
-                [message]="note.message"
-                [type]="note.type"
-                (dismissed)="remove(note)">
-            </app-notification>
-        </div>
-    `,
+    templateUrl: './notification-container.component.html',
     imports: [
-        NotificationComponent,
-        NgForOf
-    ],
+    NotificationComponent
+],
     styleUrls: ['notification-container.component.css']
 })
 export class NotificationsContainerComponent implements OnInit {
-    notifications: Notification[] = [];
+    notifications: INotification[] = [];
 
     constructor(private notificationService: NotificationService) {}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.notificationService.notifications$.subscribe(
             notes => this.notifications = notes
         );
     }
 
-    remove(note: Notification) {
+    remove(note: INotification): void {
         this.notificationService.remove(note);
     }
 }

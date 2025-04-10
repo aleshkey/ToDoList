@@ -1,24 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NotificationService } from '../../storage/service/notification.service';
-import { Notification } from '../../storage/model/notification.model';
 import { BehaviorSubject } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { NotificationComponent } from '../notification/notification.component';
 import {NotificationsContainerComponent} from "./notification-container.component";
+import {INotification} from "../../storage/model/inotification.model";
 
 describe('NotificationsContainerComponent', () => {
     let component: NotificationsContainerComponent;
     let fixture: ComponentFixture<NotificationsContainerComponent>;
     let notificationServiceSpy: jasmine.SpyObj<NotificationService>;
-    let notificationsSubject: BehaviorSubject<Notification[]>;
+    let notificationsSubject: BehaviorSubject<INotification[]>;
 
-    const mockNotifications: Notification[] = [
+    const mockNotifications: INotification[] = [
         { message: 'Test message 1', type: 'info' },
         { message: 'Test message 2', type: 'success' }
     ];
 
     beforeEach(async () => {
-        notificationsSubject = new BehaviorSubject<Notification[]>(mockNotifications);
+        notificationsSubject = new BehaviorSubject<INotification[]>(mockNotifications);
         notificationServiceSpy = jasmine.createSpyObj('NotificationService', ['remove'], {
             notifications$: notificationsSubject.asObservable()
         });

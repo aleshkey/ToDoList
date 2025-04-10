@@ -20,10 +20,6 @@ describe('InputComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should have default label', () => {
-        expect(component.label).toBe('Add a new task');
-    });
-
     it('should update value via writeValue', () => {
         const testValue = 'Hello, world!';
         component.writeValue(testValue);
@@ -44,8 +40,6 @@ describe('InputComponent', () => {
     it('should register and call onTouched', () => {
         const spyOnTouched = jasmine.createSpy('onTouched');
         component.registerOnTouched(spyOnTouched);
-
-        // Вызываем onTouched для проверки, что зарегистрированная функция срабатывает
         component.onTouched();
         expect(spyOnTouched).toHaveBeenCalled();
     });

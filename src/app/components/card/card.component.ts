@@ -1,23 +1,21 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { GithubService } from '../../storage/service/github.service';
-import { GITHUB_URL } from '../../utils/constants/url_constants';
-import { NgIf, NgOptimizedImage } from '@angular/common';
-import { GithubUser } from '../../storage/model/github-user.model';
+import { NgOptimizedImage } from '@angular/common';
 import { NotificationService } from '../../storage/service/notification.service';
 import { getErrorNotification } from '../../utils/message.util';
+import {IGithubUser} from "../../storage/model/igithub-user.model";
 
 @Component({
     selector: 'app-card',
     templateUrl: './card.component.html',
     styleUrls: ['./card.component.css'],
     imports: [
-        NgOptimizedImage,
-        NgIf
-    ]
+    NgOptimizedImage
+]
 })
 export class CardComponent implements OnInit, OnChanges {
     @Input() username: string = '';
-    user?: GithubUser;
+    user?: IGithubUser;
 
     constructor(
         private githubService: GithubService,
@@ -35,15 +33,16 @@ export class CardComponent implements OnInit, OnChanges {
     }
 
     private fetchUser(): void {
-        this.githubService.fetchGithubUser(`${GITHUB_URL}/${this.username}`)
-            .subscribe(
-                (data: GithubUser) => {
+        this.githubService
+            .fetchGithubUser(this.username)
+            .subscribe({
+                next: (data: IGithubUser) => {
                     this.user = data;
                 },
-                (error) => {
+                error: (error) => {
                     const notification = getErrorNotification(error);
                     this.notificationService.show(notification.message, notification.type);
                 }
-            );
+            });
     }
 }

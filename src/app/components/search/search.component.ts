@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NgOptimizedImage } from '@angular/common';
+import {Component, output} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {NgOptimizedImage} from '@angular/common';
 
 @Component({
     selector: 'app-search',
@@ -11,7 +11,7 @@ import { NgOptimizedImage } from '@angular/common';
 export class SearchComponent {
     username: string = '';
 
-    @Output() searchEvent = new EventEmitter<string>();
+    searchEvent = output<string>();
 
     search(): void {
         this.searchEvent.emit(this.username);
