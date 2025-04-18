@@ -1,0 +1,7 @@
+.content-wrapper {
+    transition: margin-right 0.3s ease;
+}
+
+.content-wrapper.shift {
+    margin-right: 250px; /* или другая величина, соответствующая ширине боковой панели */
+}

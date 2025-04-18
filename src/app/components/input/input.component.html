@@ -1,0 +1,10 @@
+<div class="custom-input-container" [class.filled]="value">
+    <input
+        type="text"
+        [ngModel]="value"
+        (ngModelChange)="onInputChange($event)"
+        (focus)="isFocused = true"
+        (blur)="isFocused = false"
+    />
+    <label [class.active]="isFocused || value">{{ label }}</label>
+</div>

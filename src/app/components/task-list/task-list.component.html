@@ -1,0 +1,33 @@
+<div class="task-container">
+  <p class="title">Task list</p>
+  <div class="data-table">
+    @for (task of this.taskService.getAll(); track task) {
+      <div>
+        <!-- Кастомный чекбокс -->
+        <label class="custom-checkbox">
+          <input
+            type="checkbox"
+            [(ngModel)]="task.checked"
+            (change)="updateButtonState()"
+            />
+            <span class="checkmark"></span>
+          </label>
+          <span class="content" [class.completed]="task.checked">
+            {{ task.content }}
+          </span>
+          <button class="edit-button" (click)="editTask(task.id)">✏️</button>
+          <button class="delete-button" (click)="deleteTask(task.id)">🗑</button>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="delete-submit-button">
+    <button
+      class="delete-selected-button ripple-button"
+      [disabled]="!isAnyChecked"
+      (click)="deleteSelected()"
+      >
+      Delete selected
+    </button>
+  </div>

@@ -1,0 +1,72 @@
+/* Контейнер для пользовательского инпута */
+.custom-input-container {
+    position: relative;
+    display: inline-block;
+    width: 557px;
+    font-family: Jost, serif;
+    background: var(--background-color);
+}
+
+/* Стили для поля ввода */
+input {
+    background: var(--background-color);
+    width: 100%;
+    padding: 8px 10px;
+    border: none;
+    font-size: 23px;
+    border-bottom: 4px solid #aaa;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--primary-color);
+}
+
+/* Стили для метки */
+label {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    background: var(--background-color);
+    font-size: 32px;
+    transform: translateY(-70%);
+    color: #aaa;
+    transition: 0.2s ease-in-out;
+    pointer-events: none;
+}
+
+/* Изменение состояния метки при заполненном инпуте или активном фокусе */
+.filled label,
+label.active {
+    top: 0;
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
+/* Мобильные стили */
+@media (max-width: 390px) {
+    .custom-input-container {
+        width: calc(100% - 62px);
+        margin-left: 31px;
+    }
+
+    input {
+        width: calc(100% - 62px);
+        padding: 8px 10px;
+        border: none;
+        font-size: 20px;
+        border-bottom: 4px solid #aaa;
+        outline: none;
+    }
+
+    label {
+        left: 10px;
+        top: 50%;
+        background: var(--background-color);
+        font-size: 24px;
+        transform: translateY(-70%);
+        color: #aaa;
+        transition: 0.2s ease-in-out;
+        pointer-events: none;
+    }
+}

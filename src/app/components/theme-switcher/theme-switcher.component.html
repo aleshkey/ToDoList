@@ -1,0 +1,15 @@
+<div class="theme-switcher">
+  <label class="text-sm text-gray-500">Switch Theme</label>
+  <div class="dropdown">
+    <button class="dropdown-button" (click)="toggleDropdown()">
+      {{ theme === 'light' ? 'Light theme' : 'Dark theme' }}
+      <span class="arrow">▼</span>
+    </button>
+    @if (isDropdownOpen) {
+      <ul class="dropdown-menu">
+        <li (click)="setTheme('light')">Light theme</li>
+        <li (click)="setTheme('dark')">Dark theme</li>
+      </ul>
+    }
+  </div>
+</div>

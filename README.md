@@ -1,59 +1,100 @@
-# ToDoList
+# Тестовое задание Todo List
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.3.
+## Содержание
 
-## Development server
+- [Техническое задание](#Техническое-задание)
+- [Используемые технологии](#Используемые-технологии)
+- [Тестирование](#Тестирование)
+- [Полезные ссылки](#Полезные-ссылки)
 
-To start a local development server, run:
+## Техническое задание
+Необходимо реализовать Angular-приложение ToDo list.
 
-```bash
-ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### Необходимый функционал:
+- Добавление новой задачи;
+- Редактирование конкретной задачи;
+- Удаление конкретной задачи;
+- Удаление отмеченных задач;
+- Получение данных о пользователе с GitHub;
+- Возможность смены темы приложения.
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Пример графического представления:
+Ссылка на макет: [ToDo list](https://www.figma.com/design/vDAg1ykKrPYKJEW4fMO5aU/Modsen-Todo-List?node-id=0-3&t=yUcMTRERJh9AQvEp-0)
 
-```bash
-ng generate component component-name
-```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Также проект предполагает:
+- Организацию файловой структуры описанной в [structure](https://github.com/mkrivel/structure).
+- Реализацию адаптивной верстки до 390px;
+- Обязательная анимация наведения, нажатия на кнопки, прокрутки карусели и слайдеров, появления элементов на странице при рендере и скролле;
+- Оптимизацию приложения по необходимости;
+- Деплой приложения на платформу GitHub Pages или иные другие (Netlify, ...);
+- Настройку конфигурации ***babel***, ***eslint***, ***prettier***;
+- Использование алиасов для импортирования файлов;
+- Также реализация общей темы для стилей в проекте - [ссылка на пример](https://habr.com/ru/articles/591381/);
+- Оптимизацию дизайна под мобильные устройства;
+- Использование языка typescript;
+- Придерживаться требований по написанию и организации кода react приложения. Ссылка на требования: [Требования к тестовому заданию](https://github.com/annaprystavka/requirements).
 
-```bash
-ng generate --help
-```
 
-## Building
 
-To build the project run:
+#### Описание экранов
 
-```bash
-ng build
-```
+1. [Главная страница](https://www.figma.com/design/vDAg1ykKrPYKJEW4fMO5aU/Modsen-Todo-List?node-id=0-72&t=yUcMTRERJh9AQvEp-0).
+   Главная страница как и страница [Settings](https://www.figma.com/design/vDAg1ykKrPYKJEW4fMO5aU/Modsen-Todo-List?node-id=0-3&t=yUcMTRERJh9AQvEp-0)
+   включают в себя верхний блок, который предполагает реализацию перехода между страницами.
+   Добавить новую задачу можно нажатием на кнопку "Add todo" и "Enter". Если выбрана хотя бы одна задача, то на UI отображается кнопка "Deleted selected".
+   При нажатии на checkbox задача считается выполненной и все выбранные задачи таким образом можно удалить нажав кнопку "Deleted selected".
+   При редактировании задачи ее описание появляется в поле ввода и название кнопки "Add todo" меняется на "Edit". После нажатия на "Edit" новое значение сохраняется и содержимое кнопки меняется на "Add todo".
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+2. [Страница настроек](https://www.figma.com/design/vDAg1ykKrPYKJEW4fMO5aU/Modsen-Todo-List?node-id=0-3&t=yUcMTRERJh9AQvEp-0).
+   На странице есть возможность смены темы приложения(светлая/темная). После перезагрузки приложения тема должна оставаться актуальная. При вводе имени и нажатии на поиск появляется карточка с логином и аватаром пользователя.
+   Если пользователь не найден, то на странице отображается "Not found".
 
-## Running unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Используемые технологии:
+- ***node.js*** - программная платформа, основанная на движке V8 (транслирующем JavaScript в машинный код);
+- **_typescript_** - инструмент строгой типизации;
+- ***eslint*** - Линтер для JavaScript кода.
+- ***angular*** -  Framework для создания пользовательских интерфейсов;
+- ***RxJs*** - Управление асинхронными операциями и событиями в приложении;
+- ***NgRx*** -  Для упревления внутренним состоянием приложения;
+- ***yarn*** - менеджер пакетов;
+- ***jest*** — Интеграционное тестирование для веб приложений;
+- ***cypress*** — e2e тестирование для веб приложений.
 
-```bash
-ng test
-```
 
-## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
 
-```bash
-ng e2e
-```
+## Тестирование
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Реализовать тестирование c 30% покрытием функционала приложения:
 
-## Additional Resources
+- Модуль добавления/удаления/форматирования задач;
+- Модуль смены темы приложения;
+- Модуль навигации;
+- Модуль поиска;
+- Утилиты.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Полезные ссылки:
+
+[Angular](https://angular.io/docs)
+
+[NgRx](https://ngrx.io/)
+
+[RxJs](https://rxjs.dev/guide/overview)
+
+[Eslint](https://eslint.org/docs/user-guide/configuring)
+
+[Тестирование Cypress](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell)
+
+[GitHub Actions](https://github.com/features/actions)
+
+
+
+
+
+
+

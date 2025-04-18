@@ -1,0 +1,13 @@
+@if (user) {
+  <div class="card">
+    <p>Login: {{ user.login }}</p>
+    @if (user) {
+      <img
+        ngSrc="{{ user?.avatar_url }}"
+        alt="Avatar"
+        width="366"
+        height="364"
+        />
+    }
+  </div>
+}

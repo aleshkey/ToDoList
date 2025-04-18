@@ -1,0 +1,15 @@
+<div class="grid-container" [class.sidenav-open]="isSidenavOpen">
+    <div class="content">
+        <button (click)="toggleSidenav()">☰</button>
+    </div>
+    <nav class="sidenav">
+        <ul>
+            <li>
+                <a routerLink="/home" routerLinkActive="active-link" class="link">Home</a>
+            </li>
+            <li>
+                <a routerLink="/settings" routerLinkActive="active-link" class="link">Settings</a>
+            </li>
+        </ul>
+    </nav>
+</div>

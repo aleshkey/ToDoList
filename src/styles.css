@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+:root {
+    --primary-color: #3E50B5;
+    --secondary-color: #FF4081;
+    --background-color: white;
+}
+
+/* Тёмная тема */
+[data-theme="dark"] {
+    --primary-color: #603030;
+    --secondary-color: #000000;
+    --background-color: #303030;
+}
+
+[data-theme="light"] {
+    --primary-color: #3E50B5;
+    --secondary-color: #FF4081;
+    --background-color: white;
+}
+
+body {
+    background: var(--background-color);
+}
